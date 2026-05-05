@@ -1,8 +1,8 @@
 (() => {
-  const EXT_NAME = "Forge Neo Generation Notifier";
+  const EXT_NAME = "Generation Notifier";
   const CHECK_INTERVAL_MS = 1000;
   const NOTIFY_COOLDOWN_MS = 10000;
-  const SOUND_STORAGE_KEY = "forge_neo_generation_notifier_sound_enabled";
+  const SOUND_STORAGE_KEY = "generation_notifier_sound_enabled";
 
   // Ignore the first few monitor loops to avoid false notifications during Forge Neo startup.
   // This is state-based, not time-based, so it is more robust across different PCs/browsers.
@@ -76,8 +76,7 @@
   function updateButtonState() {
     if (!button || !statusLabel) return;
 
-    const text = getPermissionText();
-    statusLabel.textContent = text;
+    statusLabel.textContent = getPermissionText();
 
     if (!isNotificationSupported()) {
       button.disabled = true;
@@ -170,7 +169,7 @@
       }
 
       if (Notification.permission === "granted") {
-        new Notification("Forge Neo notification test", {
+        new Notification("Generation Notifier test", {
           body: "Notifications are enabled.\nYou will be notified when generation is complete.",
           silent: !soundEnabled,
         });
@@ -195,10 +194,10 @@
   }
 
   function createFloatingButton() {
-    if (document.getElementById("forge-neo-generation-notifier-panel")) return;
+    if (document.getElementById("generation-notifier-panel")) return;
 
     const panel = document.createElement("div");
-    panel.id = "forge-neo-generation-notifier-panel";
+    panel.id = "generation-notifier-panel";
     panel.style.position = "fixed";
     panel.style.right = "16px";
     panel.style.bottom = "16px";
@@ -306,8 +305,6 @@
       "#progressbar",
       ".progressDiv",
       ".progress",
-      "[id*='progress']",
-      "[class*='progress']",
     ];
 
     const hasVisibleProgress = progressCandidates.some((selector) => {
@@ -320,7 +317,8 @@
       return /interrupt|skip|stop|cancel|中断|スキップ|停止|キャンセル/i.test(text) && !b.disabled && isVisible(b);
     });
 
-    return hasVisibleProgress || hasActiveStopButton;
+    // Treat it as generating only when both a real progress element and an active stop/control button are visible.
+    return hasVisibleProgress && hasActiveStopButton;
   }
 
   function syncStartupState(generating) {
