@@ -1,40 +1,40 @@
 # Forge Neo Generation Notifier
 
-A simple generation-complete notification extension for Forge Neo / Stable Diffusion WebUI.
+A simple extension for Forge Neo / Stable Diffusion WebUI that notifies you when image generation is complete.
 
-This extension does not rely on Forge Neo's built-in "Request Browser Notification" feature.
-Instead, it independently monitors the generation state and sends a browser notification when generation finishes.
+This extension does not rely on Forge Neo's built-in "Request Browser Notification" feature.  
+Instead, it independently monitors the generation state and sends notifications.
 
 ---
 
 ## Features
 
-- Displays a notification panel in the bottom-right corner
-- Independent notification permission and test button
-- Sound ON / OFF toggle
+- Displays a notification panel in the bottom-right corner of the screen
+- Notification permission and test button
+- Notification sound ON / OFF toggle
 - Shows a browser notification when generation is complete
-- Plays a notification sound when sound is enabled
-- Displays generation time in the notification
+- Plays a notification sound when enabled
+- Displays the generation time in the notification
 - Shows elapsed generation time in the panel while running
-- Detects generation state from progress bars and stop buttons
+- Detects generation state from the progress bar and stop/control buttons
 
 ---
 
 ## Installation
 
-1. Place this folder inside the Forge Neo `extensions` folder
-2. Restart Forge Neo
-3. Open Forge Neo in your browser
-4. Click **Enable notifications** in the bottom-right corner
-5. If the test notification appears, setup is complete
+1. Place this folder in Forge Neo's `extensions` folder.
+2. Restart Forge Neo.
+3. Open Forge Neo in your browser.
+4. Click `Enable notifications` in the bottom-right panel.
+5. If a test notification appears, setup is complete.
 
 ---
 
-## Behavior
+## How It Works
 
-The script sends a notification only on the following state transition:
+The extension sends a notification when it detects the following state change:
 
-Generating → Idle
+Generating → Not generating
 
 ---
 
@@ -44,17 +44,15 @@ Browser notifications require a secure context.
 
 Recommended URL:
 
-```text
 http://localhost:7860
-```
 
 ---
 
 ## Notes for LAN Access
 
-When accessing Forge Neo through a LAN IP address, browser notifications may be blocked.
+Notifications may be blocked when accessing Forge Neo via a LAN IP address.
 
-For Brave or Chromium-based browsers, you can allow the LAN URL as a secure origin via the browser shortcut properties.
+In browsers such as Brave, you can allow the LAN URL as a secure origin by adding a launch option to the browser shortcut.
 
 Example for Brave:
 
@@ -62,18 +60,18 @@ Example for Brave:
 "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" --unsafely-treat-insecure-origin-as-secure="http://localhost:7860,http://192.168.1.1:7860"
 ```
 
-Replace `192.168.1.1:7860` with your actual Forge Neo LAN address.
+Change the IP address to match your own environment.
 
 ---
 
-## Button States
+## Button Labels
 
-- **Enable notifications**: Notifications have not been allowed yet
-- **Test notification**: Notifications are allowed
-- **Sound: ON / OFF**: Toggle notification sound
-- **Allow in browser settings**: Notifications are blocked by the browser
-- **HTTPS/localhost required**: The current connection is not secure
-- **Not supported**: The browser does not support notifications
+- `Enable notifications`: Notifications have not been allowed yet
+- `Test notification`: Notifications are already allowed
+- `Sound: ON / OFF`: Toggle notification sound
+- `Allow in browser settings`: Notifications are blocked
+- `HTTPS/localhost required`: The current connection is not secure
+- `Not supported`: Browser notifications are not supported
 
 ---
 
@@ -81,22 +79,23 @@ Replace `192.168.1.1:7860` with your actual Forge Neo LAN address.
 
 ### Notifications do not appear
 
-- Make sure you are accessing Forge Neo through `localhost`
-- Check browser notification permissions
-- Check OS notification settings
-- If using a LAN IP address, allow it as a secure origin in your browser
+- Make sure you are accessing Forge Neo via localhost.
+- Check your browser notification permissions.
+- Check your OS notification settings.
+- If using LAN access, allow the URL as a secure origin.
 
 ### Sound does not play
 
-- Make sure **Sound: ON** is selected
-- Some browsers may block audio until the page has received user interaction
-- Try clicking the test notification button once after loading Forge Neo
+- Make sure `Sound` is turned ON.
+- Some browsers may not play sound until after a user interaction.
+- Try clicking the test notification button once.
 
 ---
 
 ## Version
 
-v1.1.0
+v1.1.1 Reduced false detections of generation completion  
+v1.1.0 Initial public release
 
 ---
 
